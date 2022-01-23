@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+
+    backend:
+        container_name: backend
+        build: 
+          context: .
+          dockerfile: Dockerfile
+        volumes: 
+          - .:/usr/src/app/
+          - ipython_data_local:/root/.ipython/profile_default
+        ports: 
+          - "8000:8000" # Django app ports
+          - "4000:4000" # Django debugger ports
+        env_file: 
+          - .env
+        restart: always
+        depends_on: 
+          - db
+        tty: true
+  
+    db:
+        container_name: db
+        image: postgres:12.0-alpine
+        restart: unless-stopped
+        volumes:
+        - postgres_data:/var/lib/postgresql/data/
+        env_file:
+        - .env
+
+volumes:
+    postgres_data:
+    ipython_data_local: {}
