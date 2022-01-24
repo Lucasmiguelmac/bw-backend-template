@@ -18,6 +18,7 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
 
 
 RUN mkdir /app && pip install "poetry==$POETRY_VERSION" && poetry --version
+RUN apt-get update -y && apt-get install -y git
 WORKDIR /app
 
 COPY pyproject.toml poetry.lock /app/
