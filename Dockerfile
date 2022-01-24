@@ -1,8 +1,7 @@
 FROM python:3-slim AS development_build
 
-ARG DJANGO_ENV
-
-ENV DJANGO_ENV=${DJANGO_ENV} \
+ARG ENV=dev
+ENV ENV=$ENV\
   # python:
   PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
@@ -16,13 +15,12 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
   POETRY_VIRTUALENVS_CREATE=false \
   POETRY_CACHE_DIR='/var/cache/pypoetry'
 
-
 RUN mkdir /app && pip install "poetry==$POETRY_VERSION" && poetry --version
-RUN apt-get update -y && apt-get install -y git
+
+RUN if [ $ENV == "dev" ]; then apt-get update -y && apt-get install -y git; fi
+
 WORKDIR /app
-
 COPY pyproject.toml poetry.lock /app/
-RUN poetry install
-
+RUN if [ $ENV != "dev" ]; then poetry install --no-dev; else poetry install; fi
 
 COPY . .
