@@ -47,7 +47,7 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Extensions for Django"
 name = "django-extensions"
 optional = false
@@ -107,7 +107,7 @@ h11 = ">=0.8"
 standard = ["websockets (>=10.0)", "httptools (>=0.2.0,<0.4.0)", "watchgod (>=0.6)", "python-dotenv (>=0.13)", "PyYAML (>=5.1)", "uvloop (>=0.14.0,<0.15.0 || >0.15.0,<0.15.1 || >0.15.1)", "colorama (>=0.4)"]
 
 [metadata]
-content-hash = "03a6848492b428fe580a5f8925333892ac3180d8d161ff1437a8fa5269aff371"
+content-hash = "ad9af1029dc2e040d34ee89d21589a6432319e1a5b491f0ff52021f930d60c82"
 python-versions = "^3.10"
 
 [metadata.files]
