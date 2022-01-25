@@ -10,6 +10,10 @@ django = "^4.0.1"
 psycopg2-binary = "^2.9.3"
 uvicorn = "^0.17.0"
 django-simple-history = "^3.0.0"
+django-cors-headers = "^3.11.0"
+gunicorn = "^20.1.0"
+httptools = "^0.3.0"
+uvloop = "^0.16.0"
 
 [tool.poetry.dev-dependencies]
 django-extensions = "^3.1.5"
