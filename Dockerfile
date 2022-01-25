@@ -1,7 +1,7 @@
 FROM python:3-slim AS development_build
 
 ARG ENV=dev
-ENV ENV=$ENV\
+ENV ENV=$ENV \
   # python:
   PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
@@ -16,13 +16,12 @@ ENV ENV=$ENV\
   POETRY_CACHE_DIR='/var/cache/pypoetry'
 
 RUN mkdir /app && pip install "poetry==$POETRY_VERSION" && poetry --version
-
-RUN if [ $ENV == "dev" ]; then apt-get update -y && apt-get install -y git; fi
+RUN if [ "$ENV" = "dev" ]; then apt-get update -y && apt-get install -y git; fi
 
 WORKDIR /app
 
 COPY pyproject.toml poetry.lock /app/
-RUN if [ $ENV != "dev" ]; then poetry install --no-dev; else poetry install; fi
-RUN apt-get install -y build-essential
+RUN if [ "$ENV" != "dev" ]; then poetry install --no-dev; else poetry install; fi
+RUN apt-get update -y && apt-get install -y build-essential
 
 COPY . .
